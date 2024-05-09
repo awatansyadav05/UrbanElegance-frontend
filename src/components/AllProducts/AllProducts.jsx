@@ -3,9 +3,11 @@ import Layout from '../Layout/Layout'
 
 const AllProducts = () => {
   return (
-    <div>
-      all produtcs
-    </div>
+    <>
+      <div className=''>
+      all Products
+      </div>
+    </>
   )
 }
 

@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home"
 import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
+//import HeroSection from "./components/Herosection/HeroSection";
 function App() {
   const routes = createBrowserRouter([
     {
@@ -12,7 +13,7 @@ function App() {
       element: <RootLayout />,
       children: [
         {
-          path: 'home',
+          path: '/',
           element: <Home />
         },
         {
@@ -30,6 +31,10 @@ function App() {
         {
           path:'signup',
           element: <Signup/>
+        },
+        {
+          path: '/home',
+          element: <Home />
         }
       ]
     }

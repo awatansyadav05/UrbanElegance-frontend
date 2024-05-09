@@ -14,8 +14,8 @@ function Home() {
       <Service/>
       <Gallery/>
       <AllProducts/>
-      <Login/>
-      <Signup/>
+      {/* <Login/>
+      <Signup/> */}
     </div>
   )
 }
