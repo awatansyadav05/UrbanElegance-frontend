@@ -6,7 +6,7 @@ const Signup = () => {
       <div className='min-h-screen bg-pink-100' >
         <div>
           <h2 className="mt-3 mb-4 text-center text-3xl font-SEMIBOLD text-gray-900 ">
-            Become an <span className='font-bold'>Urban</span><span className='text-red-500 font-bold' >Elegance</span> member
+            Become an <span className='font-bold'>Urban</span><span className='text-red-500 font-bold font-mono' >Elegance</span> member
           </h2>
         </div>
         <div className="max-w-lg mx-auto mb-8 bg-white-300 container px-2 py-15 ">

@@ -10,7 +10,7 @@ function Navbar() {
         <header className="bg-white border-b border-gray-200">
         <div className="container mx-auto flex justify-between p-5 items-center">
           <div>
-          <Link to='/home'> <h3 className='font-bold text-2xl'> 
+          <Link to='/home'> <h3 className='font-bold text-2xl font-mono'> 
             Urban<span className='text-red-500'>Elegance</span></h3></Link>
            
           </div>
