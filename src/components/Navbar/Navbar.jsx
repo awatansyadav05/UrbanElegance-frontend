@@ -20,8 +20,8 @@ function Navbar() {
           <Link to={'/home'}> <li className='mr-5 hover:text-gray-900 cursor-pointer'>Home</li></Link>
           <Link to={'/allproducts'}>  <li className='mr-5 hover:text-gray-900 cursor-pointer'>All Products</li> </Link>
          
-          <li className='mr-5 hover:text-gray-900 cursor-pointer'>Mens</li>
-          <li className='mr-5 hover:text-gray-900 cursor-pointer'>Kids</li>
+          <li className='mr-5 hover:text-gray-900 cursor-pointer'>About </li>
+          <li className='mr-5 hover:text-gray-900 cursor-pointer'>Contact</li>
           </ul>
           </div>
           <div className='flex justify-center items-center gap-3'>
