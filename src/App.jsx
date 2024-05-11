@@ -33,7 +33,7 @@ function App() {
           element: <Signup/>
         },
         {
-          path: '/home',
+          path: 'home',
           element: <Home />
         }
       ]

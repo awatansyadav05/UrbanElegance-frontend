@@ -13,7 +13,7 @@ function Home() {
       <HeroSection />
       <Service/>
       <Gallery/>
-      <AllProducts/>
+     {/* <AllProducts/> */}
       {/* <Login/>
       <Signup/> */}
     </div>
