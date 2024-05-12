@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const AllProducts = () => {
+const AllProducts = ({AddToCart}) => {
   const [allProducts, setAllProducts] = useState([]);
   const [allCategory, setAllCategory] = useState([]);
   const [products, setProducts] = useState([]);
@@ -12,7 +12,7 @@ const AllProducts = () => {
     const fetchAllProducts = async () => { // Renamed function to avoid conflicts
       try {
         const res = await axios("https://dummyjson.com/products/category/tops");
-        console.log(res);
+       // console.log(res);
         setAllProducts(res.data.products);
       } catch (error) {
         console.log(error);
@@ -63,7 +63,7 @@ const AllProducts = () => {
         </h2>
       </div>
       </div>
-      <div className='flex gap-3 flex-wrap'>
+      <div className='flex gap-3 flex-wrap justify-center'>
         <select onChange={(e) => filterProducts(e.target.value)}>
           <option>Filter By Category</option>
           {allCategory.filter((filterItem) =>
@@ -113,6 +113,9 @@ const AllProducts = () => {
                 Rating: {AllItems.rating}
               </h2>
               <p className="mt-1">Price: Rs.{AllItems.price}</p>
+              <button className='text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-800 dark:hover:bg-slate-800 dark:focus:ring-gray-800 ' onClick={()=> AddToCart(AllItems)}>
+                Add to Cart
+              </button>
             </div>
           ))}
         </div>

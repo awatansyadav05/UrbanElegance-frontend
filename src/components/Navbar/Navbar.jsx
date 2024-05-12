@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaShoppingCart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Cart from '../../pages/Cart/Cart';
 
-function Navbar() {
+function Navbar({cart}) {
   return (
     <>
       <div>
@@ -27,7 +28,8 @@ function Navbar() {
           <div className='flex justify-center items-center gap-3'>
           <Link to={'/login'}> <button className=' bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base  font-semibold'>Login </button></Link>
             
-           <Link to={'/cart'}><button className='cursor-pointer'><FaShoppingCart size={30}/></button></Link>
+           <Link to={'/cart'}><button className='cursor-pointer'>
+           <span>{Cart.length}</span> <FaShoppingCart size={25} /></button></Link>
            <button className='md:hidden'> <GiHamburgerMenu size={30} /></button>
 
           </div>
