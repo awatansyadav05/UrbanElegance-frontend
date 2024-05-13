@@ -5,14 +5,23 @@ import Home from "./pages/Home/Home"
 import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import { auth } from "./Firebase/Firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { Toaster } from "react-hot-toast";
+
 //import HeroSection from "./components/Herosection/HeroSection";
 function App() {
 
   //cart updated
   const [cart, setCart] =useState([])
+  const [promocode, setPromoCode] = useState("")
+  const [discount , setDiscount] = useState(0)
+  const [invalid, setInvalid] = useState("Invalid Promocode")
+  const [userName, setUserName] =useState("");
+  //add to cart
   const AddToCart=(products) =>{
     const isProductexist = cart.find((findItem )=> findItem.id === products.id)
 
@@ -47,10 +56,40 @@ function App() {
     const updateByFilter = cart.filter((filterItem )=>filterItem.id !==id);
     setCart(updateByFilter);
   }
+  const getTotalPrice =()=> {
+    const totalPrice = cart.reduce((total, cartReduceItem)=> {
+      return total + cartReduceItem.price * cartReduceItem.quantity
+    },0)
+    return totalPrice-discount;
+  }
+
+  const applyPromocode = () =>{
+    if(promocode === "DISCOUNT10")
+      {
+        setDiscount(getTotalPrice()*0.1)
+        setPromoCode("")
+      }
+      else{
+        setInvalid(invalid)
+      }
+  }
+
+  //update Profile
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+        if (user){
+          setUserName(user.displayName);
+        }
+        else
+        {
+          setUserName("")
+        }
+        
+      })
+  },[]) 
 
 
-
-  const routes = createBrowserRouter([
+const routes = createBrowserRouter([
     {
       path: '/',
       element: <RootLayout />,
@@ -61,7 +100,7 @@ function App() {
         },
         {
           path: 'cart',
-          element: <Cart cart={cart} handleDec={handleDec} handleInc= {handleInc} handleRemove={handleRemove} />
+          element: <Cart cart={cart} handleDec={handleDec} handleInc= {handleInc} handleRemove={handleRemove} getTotalPrice={getTotalPrice} applyPromocode={applyPromocode} promocode={promocode} setPromoCode={setPromoCode} invalid={invalid}/>
         },
         {
           path:'allproducts',
@@ -80,12 +119,16 @@ function App() {
           element: <Home />
         },
         {
-          path: 'home',
-          element: <Navbar cart={cart}/>
+          path: '',
+          element: <Navbar cart={cart} userName={userName} />
         },
         {
-          path: '/',
+          path: '',
           element: <Footer/>
+        },
+        {
+          path:'',
+          element: <Toaster/>
         }
       ]
     }
@@ -94,8 +137,6 @@ function App() {
   return (
     <>
       <RouterProvider router={routes} />
-
-
     </>
   )
 }

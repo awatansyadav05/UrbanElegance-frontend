@@ -7,6 +7,7 @@ const AllProducts = ({AddToCart}) => {
   const [products, setProducts] = useState([]);
   const [selectProducts, setSelectProducts] = useState("");
   const [showProduct, setShowProducts] = useState(false); // Corrected the string to boolean
+  const [searchItem , setSearchItem] = useState("");
 
   useEffect(() => {
     const fetchAllProducts = async () => { // Renamed function to avoid conflicts
@@ -52,6 +53,14 @@ const AllProducts = ({AddToCart}) => {
     getAllProducts();
   }, [selectProducts]);
 
+  const handleSearchItem=(e) =>{
+    const query = e.target.value;
+    setSearchItem(query); 
+}
+const filteredProducts = products.filter(item =>
+  item.title.toLowerCase().includes(searchItem.toLowerCase())
+);
+
   return (
     <>
       {/* Product category section */}
@@ -63,7 +72,7 @@ const AllProducts = ({AddToCart}) => {
         </h2>
       </div>
       </div>
-      <div className='flex gap-3 flex-wrap justify-center'>
+      <div className='flex gap-3 flex-wrap justify-center mt-3 text-2xl'>
         <select onChange={(e) => filterProducts(e.target.value)}>
           <option>Filter By Category</option>
           {allCategory.filter((filterItem) =>
@@ -77,6 +86,10 @@ const AllProducts = ({AddToCart}) => {
             ))}
         </select>
       </div>
+      <div className='text-center mt-3 text-2xl'> 
+            <input placeholder='search item' className='border-4 px-2 py-2' onChange={handleSearchItem} /  >
+      </div>
+
       {/* Products section */}
       {showProduct ? (
         <section className='text-gray-600 body-font'>

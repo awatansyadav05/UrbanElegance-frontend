@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Cart from '../../pages/Cart/Cart';
 
-function Navbar({cart}) {
+function Navbar({cart,userName}) {
   return (
     <>
       <div>
@@ -27,6 +27,10 @@ function Navbar({cart}) {
           </div>
           <div className='flex justify-center items-center gap-3'>
           <Link to={'/login'}> <button className=' bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base  font-semibold'>Login </button></Link>
+
+          <span>
+            {userName}
+          </span>
             
            <Link to={'/cart'}><button className='cursor-pointer'>
            <span>{Cart.length}</span> <FaShoppingCart size={25} /></button></Link>
