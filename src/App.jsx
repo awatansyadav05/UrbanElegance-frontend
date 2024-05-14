@@ -11,6 +11,9 @@ import Footer from "./components/Footer/Footer";
 import { auth } from "./Firebase/Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { Toaster } from "react-hot-toast";
+import About from "./components/About/About";
+import Contact from "./components/Contact/Contact";
+
 
 //import HeroSection from "./components/Herosection/HeroSection";
 function App() {
@@ -127,8 +130,12 @@ const routes = createBrowserRouter([
           element: <Footer/>
         },
         {
-          path:'',
-          element: <Toaster/>
+          path:'about',
+          element: <About/>
+        },
+        {
+          path: 'contact',
+          element: <Contact/>
         }
       ]
     }
@@ -136,6 +143,9 @@ const routes = createBrowserRouter([
 
   return (
     <>
+      <Toaster/>
+     
+   
       <RouterProvider router={routes} />
     </>
   )

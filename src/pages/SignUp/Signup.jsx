@@ -4,34 +4,30 @@ import { auth } from '../../Firebase/Firebase';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 
-const Signup = () => {
-  const navigateLogin=useNavigate();
 
+const Signup = () => {
+  const navigateLogin = useNavigate();
   const [userSignup, setUserSignup] = useState({ username: "", email: "", password: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserSignup({ ...userSignup, [name]: value });
-    
   };
 
-  const handleSubmit =(e)=> {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if(!userSignup.username || !userSignup.email || !userSignup.password){
-
-     return toast.error("Please fill all details")
+    if (!userSignup.username || !userSignup.email || !userSignup.password) {
+      return toast.error("Please fill all details");
+    } else {
+      createUserWithEmailAndPassword(auth, userSignup.email, userSignup.password)
+        .then(async (res) => {
+          const user = res.user;
+          await updateProfile(user, { displayName: userSignup.username }); // Corrected: updateProfile function call
+          navigateLogin('/login'); // Corrected: use navigateLogin instead of useNavigate
+        })
+        .catch((err) => toast.error(err.message));
     }
-    else{
-      createUserWithEmailAndPassword(auth, userSignup.email, userSignup.password).then(async(res)=> {
-        const user= res.user
-        await updateProfile (user,{
-          displayName:userSignup.username
-        });
-        useNavigate("/login")
-      })
-      .catch((err)=>toast.error(err.message))
-    }
-  }
+  };
 
   return (
     <>
@@ -60,9 +56,9 @@ const Signup = () => {
             </div>
             <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-500"> Agree to receive communications related to order and promotional offers.</label>
           </div>
-          <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleSubmit}>
-            Become an <span className='font-bold'>Urban</span><span className='text-red-500 font-bold'>Elegance</span> member
-          </button>
+          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleSubmit}>
+  Become an <span className='font-bold'>Urban</span><span className='text-red-500 font-bold'>Elegance</span> member
+</button>
 
           <p className=" dark:text-balck text-sm mt-5 sm:mt-0 py-3  font-medium text-gray-900 dark:text-gray-500">Already account? <a href="login" className="text-blue-700 hover:underline">Login</a></p>
 
