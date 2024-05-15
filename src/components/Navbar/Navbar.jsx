@@ -24,27 +24,27 @@ function Navbar({ cart, userName }) {
                 <Link to={'/allproducts'}>
                   <li className='mr-5 hover:text-gray-900 cursor-pointer'>All Products</li>
                 </Link>
-                <Link to={'/about'} >
-                <li className='mr-5 hover:text-gray-900 cursor-pointer'>About </li>
+                <Link to={'/about'}>
+                  <li className='mr-5 hover:text-gray-900 cursor-pointer'>About </li>
 
                 </Link>
-                <Link  to={'/contact'} >
-                <li className='mr-5 hover:text-gray-900 cursor-pointer'>Contact</li>
+                <Link to={'/contact'} >
+                  <li className='mr-5 hover:text-gray-900 cursor-pointer'>Contact</li>
                 </Link>
-               
+
               </ul>
             </div>
-            
+
             <div className='flex items-center gap-3'>
-              
+
 
               <Link to={'/login'}>
                 <button className=' bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base font-semibold'>Login</button>
               </Link>
               <div>
-              <span> {userName} </span>
-               
-               </div>
+                <span> {userName} </span>
+
+              </div>
 
               <Link to={'/cart'}>
                 <button className='cursor-pointer'>

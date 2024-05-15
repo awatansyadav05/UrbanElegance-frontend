@@ -3,19 +3,16 @@ import React from 'react'
 import HeroSection from '../../components/Herosection/HeroSection'
 import Service from '../../components/Service/Service'
 import Gallery from '../../components/Gallery/Gallery'
-import AllProducts from '../../components/AllProducts/AllProducts'
-import Login from '../Login/Login'
-import Signup from '../SignUp/Signup'
+import PopularProducts from '../../components/PopularProducts/PopularProducts'
 
-function Home() {
+function Home({AddToCart}) {
   return (
     <div className=''>
       <HeroSection />
       <Service/>
+      <PopularProducts AddToCart={AddToCart} />
       <Gallery/>
-     {/* <AllProducts/> */}
-      {/* <Login/>
-      <Signup/> */}
+    
     </div>
   )
 }

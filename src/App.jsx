@@ -19,107 +19,105 @@ import Contact from "./components/Contact/Contact";
 function App() {
 
   //cart updated
-  const [cart, setCart] =useState([])
+  const [cart, setCart] = useState([])
   const [promocode, setPromoCode] = useState("")
-  const [discount , setDiscount] = useState(0)
+  const [discount, setDiscount] = useState(0)
   const [invalid, setInvalid] = useState("Invalid Promocode")
-  const [userName, setUserName] =useState("");
+  const [userName, setUserName] = useState("");
   //add to cart
-  const AddToCart=(products) =>{
-    const isProductexist = cart.find((findItem )=> findItem.id === products.id)
+  const AddToCart = (products) => {
+    const isProductexist = cart.find((findItem) => findItem.id === products.id)
 
-    if(isProductexist){
-      const upDateCart = cart.map((item)=> (
-        item.id === products.id? {...item, quantity:item.quantity+1}:item
+    if (isProductexist) {
+      const upDateCart = cart.map((item) => (
+        item.id === products.id ? { ...item, quantity: item.quantity + 1 } : item
       ))
       setCart(upDateCart);
     }
-    else{
-      setCart([...cart, {...products, quantity:1}])
+    else {
+      setCart([...cart, { ...products, quantity: 1 }])
     }
     console.log(cart);
   }
 
   //cart increase
-  const handleInc= (id) =>{
-    const incQuality =cart.map((item)=> (
-      item.id ===id ? {...item, quantity:item.quantity+1}:item))
-      setCart(incQuality)
+  const handleInc = (id) => {
+    const incQuality = cart.map((item) => (
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item))
+    setCart(incQuality)
   }
 
-    //cart decrease
-  const handleDec=(id) =>{
-    const decQuality= cart.map((item)=> (
-      item.id===id && item.quantity>1 ? {...item, quantity:item.quantity-1}:item
+  //cart decrease
+  const handleDec = (id) => {
+    const decQuality = cart.map((item) => (
+      item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
     ))
     setCart(decQuality)
   }
 
-  const handleRemove=(id) => {
-    const updateByFilter = cart.filter((filterItem )=>filterItem.id !==id);
+  const handleRemove = (id) => {
+    const updateByFilter = cart.filter((filterItem) => filterItem.id !== id);
     setCart(updateByFilter);
   }
-  const getTotalPrice =()=> {
-    const totalPrice = cart.reduce((total, cartReduceItem)=> {
+  const getTotalPrice = () => {
+    const totalPrice = cart.reduce((total, cartReduceItem) => {
       return total + cartReduceItem.price * cartReduceItem.quantity
-    },0)
-    return totalPrice-discount;
+    }, 0)
+    return totalPrice - discount;
   }
 
-  const applyPromocode = () =>{
-    if(promocode === "DISCOUNT10")
-      {
-        setDiscount(getTotalPrice()*0.1)
-        setPromoCode("")
-      }
-      else{
-        setInvalid(invalid)
-      }
+  const applyPromocode = () => {
+    if (promocode === "DISCOUNT10") {
+      setDiscount(getTotalPrice() * 0.1)
+      setPromoCode("")
+    }
+    else {
+      setInvalid(invalid)
+    }
   }
 
   //update Profile
-  useEffect(()=>{
-    auth.onAuthStateChanged((user)=>{
-        if (user){
-          setUserName(user.displayName);
-        }
-        else
-        {
-          setUserName("")
-        }
-        
-      })
-  },[]) 
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserName(user.displayName);
+      }
+      else {
+        setUserName("")
+      }
+
+    })
+  }, [])
 
 
-const routes = createBrowserRouter([
+  const routes = createBrowserRouter([
     {
       path: '/',
       element: <RootLayout />,
       children: [
         {
           path: '/',
-          element: <Home />
+          element: <Home AddToCart={AddToCart} />
         },
         {
           path: 'cart',
-          element: <Cart cart={cart} handleDec={handleDec} handleInc= {handleInc} handleRemove={handleRemove} getTotalPrice={getTotalPrice} applyPromocode={applyPromocode} promocode={promocode} setPromoCode={setPromoCode} invalid={invalid}/>
+          element: <Cart cart={cart} handleDec={handleDec} handleInc={handleInc} handleRemove={handleRemove} getTotalPrice={getTotalPrice} applyPromocode={applyPromocode} promocode={promocode} setPromoCode={setPromoCode} invalid={invalid} />
         },
         {
-          path:'allproducts',
-          element: <AllProducts AddToCart={AddToCart}/>
+          path: 'allproducts',
+          element: <AllProducts AddToCart={AddToCart} />
         },
         {
-          path:'login',
-          element: <Login/>
+          path: 'login',
+          element: <Login />
         },
         {
-          path:'signup',
-          element: <Signup/>
+          path: 'signup',
+          element: <Signup />
         },
         {
           path: 'home',
-          element: <Home />
+          element: <Home AddToCart={AddToCart} />
         },
         {
           path: '',
@@ -127,15 +125,15 @@ const routes = createBrowserRouter([
         },
         {
           path: '',
-          element: <Footer/>
+          element: <Footer />
         },
         {
-          path:'about',
-          element: <About/>
+          path: 'about',
+          element: <About />
         },
         {
           path: 'contact',
-          element: <Contact/>
+          element: <Contact />
         }
       ]
     }
@@ -143,9 +141,9 @@ const routes = createBrowserRouter([
 
   return (
     <>
-      <Toaster/>
-     
-   
+      <Toaster />
+
+
       <RouterProvider router={routes} />
     </>
   )

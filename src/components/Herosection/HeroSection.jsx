@@ -9,14 +9,12 @@ function HeroSection() {
       
       
       </div>
-      <div className='absolute  left-[50%] top-[20%] '>
-        <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-red-500 font-mono'>
-          Discover Your New Adventure !
+      <div className='absolute   left-[50%]  top-[30%] '>
+  <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-red-500 font-mono'>
+    Discover Your New Adventure!
+  </h1>
+</div>
 
-        </h1>
-        
-
-      </div>
       <p className='absolute bottom-90 left-0 w-full text-center text-2xl mb-20 font-cursive italic text-gray-500 bg-opacity-50 p-0 '>"Shop Our Latest Arrival & Unleash Your Style"</p>
       
 
