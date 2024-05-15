@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { auth } from '../../Firebase/Firebase';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
+import { getAuth, updateProfile } from "firebase/auth";
 
 
 const Signup = () => {
@@ -10,8 +11,9 @@ const Signup = () => {
   const [userSignup, setUserSignup] = useState({ username: "", email: "", password: "" });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserSignup({ ...userSignup, [name]: value });
+    
+    setUserSignup({ ...userSignup, [e.target.name]:e.target.value });
+    
   };
 
   const handleSubmit = (e) => {
@@ -22,8 +24,8 @@ const Signup = () => {
       createUserWithEmailAndPassword(auth, userSignup.email, userSignup.password)
         .then(async (res) => {
           const user = res.user;
-          await updateProfile(user, { displayName: userSignup.username }); // Corrected: updateProfile function call
-          navigateLogin('/login'); // Corrected: use navigateLogin instead of useNavigate
+          await updateProfile(user, { displayName: userSignup.username }); 
+          navigateLogin('/login'); 
         })
         .catch((err) => toast.error(err.message));
     }

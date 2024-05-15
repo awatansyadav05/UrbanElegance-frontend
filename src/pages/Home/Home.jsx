@@ -5,6 +5,7 @@ import Service from '../../components/Service/Service'
 import Gallery from '../../components/Gallery/Gallery'
 import PopularProducts from '../../components/PopularProducts/PopularProducts'
 
+
 function Home({AddToCart}) {
   return (
     <div className=''>
@@ -12,6 +13,7 @@ function Home({AddToCart}) {
       <Service/>
       <PopularProducts AddToCart={AddToCart} />
       <Gallery/>
+      
     
     </div>
   )

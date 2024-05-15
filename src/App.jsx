@@ -2,14 +2,14 @@ import RootLayout from "./RootLayout";
 import AllProducts from "./components/AllProducts/AllProducts";
 import Cart from "./pages/Cart/Cart"
 import Home from "./pages/Home/Home"
-import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {  createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/Signup";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { auth } from "./Firebase/Firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { auth} from "./Firebase/Firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Toaster } from "react-hot-toast";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
@@ -76,18 +76,17 @@ function App() {
     }
   }
 
-  //update Profile
+  //username display
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
+    auth.onAuthStateChanged( (user) => {
+      if (user){
         setUserName(user.displayName);
       }
-      else {
-        setUserName("")
+      else{
+        setUserName("")  
       }
-
-    })
-  }, [])
+    });
+  }, []);
 
 
   const routes = createBrowserRouter([
@@ -142,8 +141,7 @@ function App() {
   return (
     <>
       <Toaster />
-
-
+      
       <RouterProvider router={routes} />
     </>
   )

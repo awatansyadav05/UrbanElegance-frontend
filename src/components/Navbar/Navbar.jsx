@@ -47,14 +47,16 @@ function Navbar({ cart, userName }) {
               </div>
 
               <Link to={'/cart'}>
-                <button className='cursor-pointer'>
-                  <span>{Cart.length}</span> <FaShoppingCart size={25} />
+                <button className='cursor-pointer relative '>
+                  <span className='absoulte top-[-5px] bg-red right-0 text-white px-2 rounded-full ' >{Cart.length}</span> <FaShoppingCart size={25} />
                 </button>
               </Link>
-
-              <button className='md:hidden'>
+               
+                    <button className='md:hidden' >
                 <GiHamburgerMenu size={30} />
               </button>
+                  
+             
             </div>
           </div>
         </header>
