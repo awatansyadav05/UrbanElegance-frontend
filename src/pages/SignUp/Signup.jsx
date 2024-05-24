@@ -15,6 +15,7 @@ const Signup = () => {
     setUserSignup({ ...userSignup, [e.target.name]:e.target.value });
     
   };
+  // this is sign up
 
   const handleSubmit = (e) => {
     e.preventDefault();
